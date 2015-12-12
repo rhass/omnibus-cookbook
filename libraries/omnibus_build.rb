@@ -88,14 +88,18 @@ class Chef
     end
 
     def build_command
-      [
+      cmd = [
         'omnibus',
         'build',
         new_resource.project_name,
         "--log-level #{new_resource.log_level}",
-        "--config #{new_resource.config_file}",
-        "--override #{new_resource.config_overrides.map { |k, v| "#{k}:#{v}" }.join(' ')}"
+        "--config #{new_resource.config_file}"
       ].join(' ')
+      unless new_resource.config_overrides.empty?
+        cmd << " --override #{ new_resource.config_overrides.map { |k, v| "#{k}:#{v}" }.join(' ')}"
+      end
+
+      cmd
     end
 
     def prepare_build_enviornment
