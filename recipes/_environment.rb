@@ -122,8 +122,6 @@ else
 
   file ::File.join(build_user_home, 'load-omnibus-toolchain.sh') do
     content <<-EOH.gsub(/^ {6}/, '')
-      #!/usr/bin/env bash
-
       ###################################################################
       # Load the base Omnibus environment
       ###################################################################
